@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -44,7 +42,7 @@ public class Healthbar : MonoBehaviour
         }
         else
         {
-            image.color = Color.green;
+            image.color = Color.blue;
         }
     }
 }
