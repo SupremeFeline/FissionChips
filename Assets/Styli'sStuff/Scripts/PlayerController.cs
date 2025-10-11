@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-/*
+using UnityEngine.InputSystem;
+
 public class Movement2D : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -27,29 +28,29 @@ public class Movement2D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
 
-        if (Input.GetKey(KeyCode.W))
+
+        if (Keyboard.current.wKey.isPressed)
         {
             transform.position += new Vector3(0, 1, 0) * speed * Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.S))
+        if (Keyboard.current.sKey.isPressed)
         {
             transform.position += new Vector3(0, -1, 0) * speed * Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (Keyboard.current.aKey.isPressed)
         {
             transform.position += new Vector3(-1, 0, 0) * speed * Time.deltaTime;
         }
 
-        if(Input.GetKey(KeyCode.D))
+        if (Keyboard.current.dKey.isPressed)
         {
             transform.position += new Vector3(1, 0, 0) * speed * Time.deltaTime;
         }
 
-        if(isdead)
+        if (isdead)
         {
             Application.Quit();
         }
@@ -91,4 +92,3 @@ public class Movement2D : MonoBehaviour
     }
 
 }
-*/
