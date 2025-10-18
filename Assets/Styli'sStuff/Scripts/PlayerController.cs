@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class Movement2D : MonoBehaviour
 {
@@ -46,7 +47,7 @@ public class Movement2D : MonoBehaviour
 
         if (isdead)
         {
-            Application.Quit();
+            SceneManager.LoadScene("GameOver");
         }
 
         time -= Time.deltaTime;
