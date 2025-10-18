@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
+using Unity.VisualScripting;
 
 public class Movement2D : MonoBehaviour
 {
@@ -13,8 +14,11 @@ public class Movement2D : MonoBehaviour
     public float waterGain = 2;
     public float obstacleLoss = 5;
     private float time;
+    public float jumpHeight = 1;
+    public float jumpDelay = 0.1f;
+    private bool isGrounded = true;
     public Healthbar healthbar;
-
+    public Rigidbody2D rb;
 
 
     private Vector3 move;
@@ -30,25 +34,15 @@ public class Movement2D : MonoBehaviour
     {
 
 
-        if (Keyboard.current.wKey.isPressed)
+        if (Keyboard.current.wKey.isPressed && isGrounded)
         {
-            transform.position += new Vector3(0, 1, 0) * speed * Time.deltaTime;
+            rb.linearVelocity = new Vector2(0, jumpHeight);
+        }
+        if (Keyboard.current.wKey.wasReleasedThisFrame && rb.linearVelocity.y > 0)
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y*jumpDelay);
         }
 
-        if (Keyboard.current.sKey.isPressed)
-        {
-            transform.position += new Vector3(0, -1, 0) * speed * Time.deltaTime;
-        }
-
-        if (Keyboard.current.aKey.isPressed)
-        {
-            transform.position += new Vector3(-1, 0, 0) * speed * Time.deltaTime;
-        }
-
-        if (Keyboard.current.dKey.isPressed)
-        {
-            transform.position += new Vector3(1, 0, 0) * speed * Time.deltaTime;
-        }
 
         if (isdead)
         {
@@ -67,9 +61,15 @@ public class Movement2D : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("game over!");
-        isdead = true;
+
+        isGrounded = true;
     }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        isGrounded = false;
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
