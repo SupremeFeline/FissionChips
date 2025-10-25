@@ -43,11 +43,11 @@ public class ObstacleSpawnScript : MonoBehaviour
         switch (randomHeight)
         {
             case 0:
-                position = -3;
+                position = -2;
                 lastSpawnOnTop = false;
                 break;
             default:
-                position = 3;
+                position = 2.5f;
                 lastSpawnOnTop = true;
                 break;
         }

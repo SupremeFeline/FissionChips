@@ -28,6 +28,7 @@ public class Movement2D : MonoBehaviour
     {
         time = maxTime;
         healthbar.SetMaxTime(time);
+
     }
 
     // Update is called once per frame
