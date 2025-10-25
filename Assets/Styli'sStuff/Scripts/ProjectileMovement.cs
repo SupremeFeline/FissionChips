@@ -15,7 +15,7 @@ public class ProjectileMovement : MonoBehaviour
     void Update()
     {
 
-        transform.position += new Vector3(0, 1, 0) * speed * Time.deltaTime;
+        transform.position += new Vector3(-1, 0, 0) * speed * Time.deltaTime;
 
 
     }

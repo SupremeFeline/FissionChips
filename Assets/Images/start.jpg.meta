@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1650e56b906be7845bcea5ac5d757766
+guid: a1146eb4a6ade014496ce3073c620574
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4032872342635008252
-    second: IMG_2419_0
+      213: 5738044013355051117
+    second: pexels-lloyd-mitchel-guanzon-242484800-12310564_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IMG_2419_0
+      name: pexels-lloyd-mitchel-guanzon-242484800-12310564_0
       rect:
         serializedVersion: 2
-        x: 404
-        y: 1025
-        width: 698
-        height: 693
+        x: 0
+        y: 0
+        width: 3507
+        height: 4020
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cf0d14f4704a7f730800000000000000
-      internalID: 4032872342635008252
+      spriteID: d68a591f0a0a1af40800000000000000
+      internalID: 5738044013355051117
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      IMG_2419_0: 4032872342635008252
+      pexels-lloyd-mitchel-guanzon-242484800-12310564_0: 5738044013355051117
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
