@@ -15,7 +15,7 @@ public class Movement2D : MonoBehaviour
     public float waterGain = 2;
     public float obstacleLoss = 5;
     private float time;
-    public float jumpHeight = 1;
+    public float jumpHeight = 2;
     public float jumpDelay = 0.1f;
     private bool isGrounded = true;
     public Healthbar healthbar;
