@@ -8,7 +8,8 @@ public class ObstacleSpawnScript : MonoBehaviour
     public GameObject water;
     public float spawnRate = 0;
     public float timer = 0;
-    public bool lastSpawnOnTop;
+    int lastSpawn = -1;
+    bool lastWaterSpawn = false;
 
     public List<GameObject> obstacles = new List<GameObject>();
 
@@ -37,18 +38,15 @@ public class ObstacleSpawnScript : MonoBehaviour
     void SpawnObstacle()
     {
         int randomHeight = Random.Range(0, 3);
-        int randomObject = Random.Range(0, 6);
-        int duplicatRandomPrevention = Random.Range(0, 5);
+        int waterSpawn = Random.Range(0, 8);
+        int duplicateRandomPrevention = Random.Range(0, 7);
         float position = -1;
         GameObject obstacle;
 
-        if (lastSpawnOnTop)
+
+        if (lastSpawn == 1 || lastSpawn == 2)
         {
-            bool spawnOnTopAgain = (duplicatRandomPrevention > 0) ? true : false;
-            if (!spawnOnTopAgain)
-            {
-                randomHeight = Random.Range(0, 2);
-            }
+            randomHeight = (duplicateRandomPrevention > 1) ? 0 : Random.Range(1, 3);
         }
 
 
@@ -56,29 +54,31 @@ public class ObstacleSpawnScript : MonoBehaviour
         {
             case 0:
                 position = -3;
-                lastSpawnOnTop = false;
+                lastSpawn = 0;
                 int randomSandcastleType = Random.Range(0, 3);
                 obstacle = obstacles.ElementAt(randomSandcastleType);
                 break;
             case 1:
                 position = 0;
-                lastSpawnOnTop = false;
-                obstacle = obstacles.ElementAt(1);
+                lastSpawn = 1;
+                obstacle = obstacles.ElementAt(3);
                 break;
             default:
                 position = 2.5f;
-                lastSpawnOnTop = true;
-                obstacle = obstacles.ElementAt(2);
+                lastSpawn = 2;
+                obstacle = obstacles.ElementAt(4);
                 break;
         }
 
-        if (randomObject > 1)
+        if (waterSpawn > 1 || lastWaterSpawn == true)
         {
             Instantiate(obstacle, new Vector3(transform.position.x, position, 0), transform.rotation);
+            lastWaterSpawn = false;
         }
         else
         {
             Instantiate(water, new Vector3(transform.position.x, position, 0), transform.rotation);
+            lastWaterSpawn = true;
         }
 
     }
