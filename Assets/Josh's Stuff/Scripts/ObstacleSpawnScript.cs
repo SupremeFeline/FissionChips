@@ -1,11 +1,16 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ObstacleSpawnScript : MonoBehaviour
 {
-    public GameObject obstacle;
+    public GameObject water;
     public float spawnRate = 0;
     public float timer = 0;
     public bool lastSpawnOnTop;
+
+    public List<GameObject> obstacles = new List<GameObject>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,28 +36,50 @@ public class ObstacleSpawnScript : MonoBehaviour
 
     void SpawnObstacle()
     {
-        int randomHeight = Random.Range(0, 2);
+        int randomHeight = Random.Range(0, 3);
+        int randomObject = Random.Range(0, 6);
         int duplicatRandomPrevention = Random.Range(0, 5);
         float position = -1;
+        GameObject obstacle;
 
         if (lastSpawnOnTop)
         {
-            randomHeight = (duplicatRandomPrevention > 0) ? 0 : 1;
+            bool spawnOnTopAgain = (duplicatRandomPrevention > 0) ? true : false;
+            if (!spawnOnTopAgain)
+            {
+                randomHeight = Random.Range(0, 2);
+            }
         }
+
 
         switch (randomHeight)
         {
             case 0:
-                position = -2;
+                position = -3;
                 lastSpawnOnTop = false;
+                int randomSandcastleType = Random.Range(0, 3);
+                obstacle = obstacles.ElementAt(randomSandcastleType);
+                break;
+            case 1:
+                position = 0;
+                lastSpawnOnTop = false;
+                obstacle = obstacles.ElementAt(1);
                 break;
             default:
                 position = 2.5f;
                 lastSpawnOnTop = true;
+                obstacle = obstacles.ElementAt(2);
                 break;
         }
 
-        Instantiate(obstacle, new Vector3(transform.position.x, position, 0), transform.rotation);
+        if (randomObject > 1)
+        {
+            Instantiate(obstacle, new Vector3(transform.position.x, position, 0), transform.rotation);
+        }
+        else
+        {
+            Instantiate(water, new Vector3(transform.position.x, position, 0), transform.rotation);
+        }
 
     }
 }
