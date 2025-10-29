@@ -21,6 +21,19 @@ public class Movement2D : MonoBehaviour
     public Healthbar healthbar;
     public Rigidbody2D rb;
 
+    private SpriteRenderer spriteRenderer;
+
+    //obstacle flash props
+    public Color flashColor = new Color(1f, 0f, 0f, 0.5f);
+    public float flashDuration = 0.1f;
+    public int flashCount = 3;
+
+    //water flash props
+    public Color waterHealthColor = new Color(0f, 0f, 1f, 0.5f);
+    public float waterFadeDuration = 0.5f;
+    public float waterHealthHoldTime = 0.1f;
+
+    private Color originalColor;
 
     private Vector3 move;
     private bool isdead = false;
@@ -28,6 +41,8 @@ public class Movement2D : MonoBehaviour
     {
         time = maxTime;
         healthbar.SetMaxTime(time);
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
 
     }
 
@@ -42,7 +57,7 @@ public class Movement2D : MonoBehaviour
         }
         if (Keyboard.current.wKey.wasReleasedThisFrame && rb.linearVelocity.y > 0)
         {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y*jumpDelay);
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y * jumpDelay);
         }
 
 
@@ -82,6 +97,7 @@ public class Movement2D : MonoBehaviour
             {
                 time = maxTime;
             }
+            StartCoroutine(FlashBlue());
         }
         if (collision.gameObject.CompareTag("Obstacle"))
         {
@@ -90,7 +106,37 @@ public class Movement2D : MonoBehaviour
             {
                 time = 0;
             }
+
+            StartCoroutine(FlashRed());
+
         }
     }
 
+    private IEnumerator FlashRed()
+    {
+        for (int i = 0; i < flashCount; i++)
+        {
+            spriteRenderer.color = flashColor;
+            yield return new WaitForSeconds(flashDuration);
+            spriteRenderer.color = originalColor;
+            yield return new WaitForSeconds(flashDuration);
+        }
+
+    }
+
+    private IEnumerator FlashBlue()
+    {
+        spriteRenderer.color = waterHealthColor;
+        yield return new WaitForSeconds(waterHealthHoldTime);
+
+        float elapsed = 0f;
+        while(elapsed < waterFadeDuration)
+        {
+            spriteRenderer.color = Color.Lerp(waterHealthColor, originalColor, elapsed / waterFadeDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        spriteRenderer.color = originalColor;
+    }
 }
