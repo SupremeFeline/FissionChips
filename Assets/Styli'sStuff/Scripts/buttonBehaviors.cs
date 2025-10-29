@@ -7,7 +7,7 @@ public class Button_Press : MonoBehaviour
     // public function to be called on button press
     public void start()
     {
-        SceneManager.LoadScene("StyliMainScene 1");
+        SceneManager.LoadScene("MainScene");
       
     }
 
