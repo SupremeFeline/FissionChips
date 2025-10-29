@@ -6,7 +6,9 @@ public class ScoreManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Text scoreText;
     public float multiplyer = 1f;
-    private float score = 0f;
+    public static float score = 0f;
+   
+    
     void Start()
     {
         scoreText.text = "Score:";
@@ -19,4 +21,6 @@ public class ScoreManager : MonoBehaviour
         scoreText.text = "Score: " + (int)score;
 
     }
+
+  
 }
